@@ -1,5 +1,13 @@
-""" Shopping Cart String Challenge """
-from string import capwords
+""" Shopping Cart String Challenge 
+
+    Welcome to Paws n Cart, the string challenge shopping cart program.
+
+    Since this is a string challenge, this program will be
+    avoiding lists and classes as much as possible.
+    Toward that goal, I will also avoid split() and join() where possible.
+
+"""
+import re
 
 INTRO_ART = """
 '||''|.                                                  ..|'''.|                   .   
@@ -12,8 +20,8 @@ INTRO_ART = """
 
 ITEM_SEPARATOR = '~'
 INFO_SEPARATOR = "+"
-DIVIDER = "*" * 50 + "\n"
-
+DIVIDER = "." * 50 + "\n"
+# If any item in the catalog is present, the price is added.
 PRICE_CATALOG = \
     f"food{INFO_SEPARATOR}10{ITEM_SEPARATOR}" \
     f"toy{INFO_SEPARATOR}30{ITEM_SEPARATOR}" \
@@ -24,6 +32,9 @@ PRICE_CATALOG = \
 
 def add_item(shopping_cart):
     item = get_input("What would you like to add to your cart? ")
+    if shopping_cart.find(item) != -1:
+        print("This item is in your cart already.")
+        return change_quantity(shopping_cart, item=item)
     amount = get_input(
         f"How many {item} would you like to add to your cart? ",
         valid_type=int,
@@ -44,14 +55,36 @@ def add_item(shopping_cart):
     return shopping_cart
 
 
+# def remove_item(shopping_cart):
+#     selection = get_input(
+#         ""
+#     )
+#     return shopping_cart
+
+
 def change_quantity(shopping_cart, item=None):
     if not shopping_cart:
-        print("Your cart is empty, please add an item first.")
+        print("\nYour cart is empty, please add an item first.\n")
         return shopping_cart
     if not item:
-        display_cart(shopping_cart)
-        selected_item = input("Which item would you like to modify the quantity of? ")
-    
+        item_list = get_item_list(shopping_cart)
+        print(item_list.replace(ITEM_SEPARATOR, "\n"))
+        print(DIVIDER)
+        selected_item = get_input(
+            "Which item would you like to modify the quantity of? ",
+            options=item_list,
+        )
+        selected_quantity = get_input(
+            f"How many {selected_item} would you like to buy? ",
+            valid_type=int,
+        )
+        new_amount = INFO_SEPARATOR + selected_quantity + INFO_SEPARATOR
+        index = shopping_cart.find(selected_item)
+        amount_index = len(selected_item) + index
+        separator_index = shopping_cart[amount_index:].find(INFO_SEPARATOR)
+        amount_string = shopping_cart[amount_index:amount_index+separator_index]
+        print(amount_string, new_amount)
+    return shopping_cart
 
 
 def display_cart(shopping_cart):
@@ -60,6 +93,19 @@ def display_cart(shopping_cart):
     formatted_cart = formatted_cart.replace(INFO_SEPARATOR, "\t\t")
     print(f"Your Cart:{formatted_cart.title()}")
     return shopping_cart
+
+
+def end_program(shopping_cart):
+    total = get_cart_total(shopping_cart)
+    print(
+        "Thank you for shopping with us!\n",
+        f"Your total has come out to {total}.\n",
+    )
+    return None  # to end the loop
+
+
+def get_cart_total(shopping_cart):
+    return ""
 
 
 def get_input(prompt, options=None, valid_type=None, not_in=None):
@@ -92,6 +138,11 @@ def get_input(prompt, options=None, valid_type=None, not_in=None):
     return user_input
 
 
+def get_item_list(shopping_cart):
+    item_list = re.sub(f"[{INFO_SEPARATOR}0-9]", "", shopping_cart)
+    return item_list
+
+
 def main():
     """The main function controls the flow of the program.
     Welcome to Paws n Cart, the string challenge shopping cart program.
@@ -111,6 +162,7 @@ def menu():
     # Display the menu
     print(
         "What would you like to do?\n",
+        DIVIDER,
         "1. Add an item to your cart.\n",
         "2. Remove an item from your cart.\n",
         "3. View the total cost of your cart.\n",
@@ -122,10 +174,11 @@ def menu():
     # Recieve an input of which menu item they want to select
     # Must be a number on the menu
     choice = get_input(
-        "",
-        options="123456",
+        "Please select a number from the menu above: ",
+        options=f"1{ITEM_SEPARATOR}2{ITEM_SEPARATOR}3{ITEM_SEPARATOR}"\
+                f"4{ITEM_SEPARATOR}5{ITEM_SEPARATOR}6",
     )
-    # Return the corresponding function for the menu item (try a switch here)
+    # Return the corresponding function for the menu item
     match choice:
         case "1":
             return add_item
@@ -134,12 +187,12 @@ def menu():
         case "3":
             return display_cart
         case "4":
-            return
+            return change_quantity
         case "5":
             return
         case "6":
-            return 
-    
+            return end_program
+
     
 if __name__ == "__main__":
     main()
