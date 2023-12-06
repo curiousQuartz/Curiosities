@@ -7,6 +7,8 @@
 
 """
 from random import randint
+
+
 INTRO_ART = """
 '||''|.                                                  ..|'''.|                   .   
  ||   ||  ....   ... ... ...  ....       .. ...        .|'     '   ....   ... ..  .||.  
@@ -15,10 +17,8 @@ INTRO_ART = """
 .||.     '|..'|'    |   |    |'..|'      .||. ||.       ''|....'  '|..'|' .||.     '|.' 
 
 """
-
-# ITEM_SEPARATOR = '~'
-# INFO_SEPARATOR = "*"
 DIVIDER = "." * 50 + "\n"
+
 
 def add_item(shopping_cart, price_catalog):
     """Add an item to the shopping cart and update price catalog as needed.
@@ -225,10 +225,15 @@ def main():
 
 
 def menu():
-    """_summary_
+    """Displays the menu and asks the user for next action.
+    
+    Every function returned by the menu must 
+    include the necessary inputs and outputs.
+    ex. shopping_cart, price_catalog
 
     Returns:
-        _type_: _description_
+        func: returns an executable function 
+              corresponding to the menu option selected
     """
     # Display the menu
     print(
@@ -245,7 +250,7 @@ def menu():
     # Must be a number on the menu
     choice = get_input(
         "Please select a number from the menu above: ",
-        options=["1", "2", "3", "4", "5", "6"]
+        options=["1", "2", "3", "4", "5", "6"],
     )
     print(DIVIDER)
     # Return the corresponding function for the menu item
@@ -263,6 +268,6 @@ def menu():
         case "6":
             return end_program
 
-    
+
 if __name__ == "__main__":
     main()
