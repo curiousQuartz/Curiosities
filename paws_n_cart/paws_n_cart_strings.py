@@ -19,7 +19,7 @@ INTRO_ART = """
 """
 
 ITEM_SEPARATOR = '~'
-INFO_SEPARATOR = "+"
+INFO_SEPARATOR = "*"
 DIVIDER = "." * 50 + "\n"
 # If any item in the catalog is present, the price is added.
 PRICE_CATALOG = \
@@ -83,7 +83,7 @@ def change_quantity(shopping_cart, item=None):
         amount_index = len(selected_item) + index
         separator_index = shopping_cart[amount_index:].find(INFO_SEPARATOR)
         amount_string = shopping_cart[amount_index:amount_index+separator_index]
-        print(amount_string, new_amount)
+        print(shopping_cart[amount_index:], index, amount_index, separator_index, amount_string, new_amount)
     return shopping_cart
 
 
