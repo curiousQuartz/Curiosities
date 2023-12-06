@@ -142,6 +142,20 @@ def display_cart(shopping_cart, price_catalog):
     return shopping_cart, price_catalog
 
 
+def empty_cart(_, price_catalog):
+    """Reset the cart to an empty list.
+
+    Args:
+        _ (list): list of items in the users cart.
+        price_catalog (list): list of [item, price] pairs.
+
+    Returns:
+        list, list: returns the shopping cart and price catalog
+    """
+    return [], price_catalog
+
+
+
 def end_program(shopping_cart, price_catalog):
     """Display a nice message and end the program.
 
@@ -224,7 +238,6 @@ def menu():
         "2. Remove an item from your cart.\n",
         "3. View the total cost of your cart.\n",
         "4. Change an item quantity.\n",
-        DIVIDER,
         "5. Empty your shopping cart.\n",
         "6. Checkout.\n",
     )
@@ -246,7 +259,7 @@ def menu():
         case "4":
             return change_quantity
         case "5":
-            return lambda: []
+            return empty_cart
         case "6":
             return end_program
 
