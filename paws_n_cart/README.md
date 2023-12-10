@@ -8,7 +8,7 @@ Each python file is a different version of this program and can be run independe
 
 This program requires python 3.10 or later to run
 due to the use of match-case statments which were
-not introduced until this version.
+not introduced in python until this version.
 
 ## Challenge
 

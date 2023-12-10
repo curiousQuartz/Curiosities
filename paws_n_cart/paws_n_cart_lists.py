@@ -1,4 +1,4 @@
-""" Shopping Cart String Challenge 
+""" Shopping Cart List Challenge 
 
     Welcome to Paws n Cart, the list challenge shopping cart program.
 
@@ -182,10 +182,9 @@ def get_input(prompt, options=None, valid_type=None, not_in=None):
 
     Args:
         prompt (str): Prompt the user for an input
-        options (str): List of valid options for user input. 
+        options (list): List of valid options for user input. 
         valid_type (object): Check if input can be type converted to this type. 
-        not_in (str): Either a list which the input should not be in
-            or a string which the input should not be a substring in. 
+        not_in (list): List which the input should not be in. 
 
     Returns:
         str: The valid user input
@@ -209,10 +208,7 @@ def get_input(prompt, options=None, valid_type=None, not_in=None):
 
 def main():
     """The main function controls the flow of the program.
-    Welcome to Paws n Cart, the string challenge shopping cart program.
-
-    Since this is a string challenge, this program will be
-    avoiding lists and classes as much as possible.
+    Welcome to Paws n Cart, the list challenge shopping cart program.
     """
     print(INTRO_ART)
     shopping_cart = []
