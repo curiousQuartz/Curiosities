@@ -43,7 +43,7 @@ def add_item(shopping_cart, price_catalog):
         valid_type=int,
     )
     # Add new items to the price catalog.
-    if item not in price_catalog:
+    if ITEM_SEPARATOR+item+INFO_SEPARATOR not in price_catalog:
         price = randint(20,120)
         price_catalog += f"{ITEM_SEPARATOR}{item}{INFO_SEPARATOR}{price}"
     # Add the item to the cart
@@ -144,7 +144,10 @@ def display_cart(shopping_cart, price_catalog):
         name, amount = item.split(INFO_SEPARATOR)
         price = find_price(price_catalog, name)
         # Print item row and add to total price
-        print(f"{name}\t\t{amount}\t\t{price}")
+        tabs = "\t\t"
+        if len(name) < 8:
+            tabs = "\t\t\t"
+        print(f"{name}{tabs}{amount}\t\t{price}")
         total_cost += int(amount) * int(price)
     # Output the total cost
     print(f"\nTotal:\t{total_cost}\n")
@@ -162,6 +165,7 @@ def empty_cart(_, price_catalog):
     Returns:
         str, str: returns the shopping cart and price catalog
     """
+    # Reset shopping cart by returning empty string instead of cart string.
     return "", price_catalog
 
 
@@ -174,7 +178,7 @@ def end_program(shopping_cart, price_catalog):
         price_catalog (str): list of item/price pairs.
 
     Returns:
-        None: this will end the program
+        None: this is the condition to end the program
     """
     total_cost = 0
     for item in shopping_cart[1:].split(ITEM_SEPARATOR):
@@ -187,8 +191,8 @@ def end_program(shopping_cart, price_catalog):
         total_cost += int(amount) * int(price)
     # Output the total cost and thank you message
     print(
-        "Thank you for shopping with us!\n",
-        f"Your total has come out to {total_cost}.\n",
+        "Thank you for shopping with us!",
+        f"\n\nYour total has come out to {total_cost}.\n",
     )
     return None, None  # to end the loop
 
@@ -203,10 +207,14 @@ def find_price(price_catalog, name):
     Returns:
         str: the price of the item as a string
     """
-    index = price_catalog.find(name)
+    # Use the item and info separators to find the items' start and end index
+    index = price_catalog.find(ITEM_SEPARATOR+name+INFO_SEPARATOR)
     price_start = price_catalog[index:].find(INFO_SEPARATOR) + index + 1
-    price_end = price_catalog[index:].find(ITEM_SEPARATOR) + 1
-    if price_end == 0:
+    price_end = price_catalog[index:].find(ITEM_SEPARATOR) + index
+    # if price_end was -1 before adding index,
+    # aka. no more item separators were found,
+    # the item was the last one in the list.
+    if price_end == index-1:
         price_end = None
     price = price_catalog[price_start:price_end]
 
@@ -239,7 +247,8 @@ def get_input(prompt, options=None, valid_type=None):
 
 
 def get_item_list(shopping_cart, remove_info_separator=True):
-    """_summary_
+    """ Remove amount number and info separator 
+        to return a list of only items and item separators.
 
     Args:
         shopping_cart (str): list of items and amounts in the users cart.
@@ -302,6 +311,7 @@ def menu():
     )
     print(DIVIDER)
     # Return the corresponding function for the menu item
+    # Each function must have the same required inputs and outputs.
     match choice:
         case "1":
             return add_item
