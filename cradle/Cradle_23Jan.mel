@@ -1,0 +1,87 @@
+//Adira Lindzon
+//VSFX160-02
+//Project 1: Newton's Cradle
+
+//create first hanging ball
+//create ball
+polySphere -r 1 -sx 20 -sy 20 -ax 0 1 0 -cuv 2 -ch 1 -n new_sphere_01;
+//create and place strings
+polyCylinder -r 1 -h 2 -sx 20 -sy 1 -sz 1 -ax 0 1 0 -rcp 0 -cuv 3 -ch 1 -n new_string_01;
+scale -r 0.05 5 0.05 ;
+rotate -r 1 1 25;
+move -r -2 4.5 0;
+polyCylinder -r 1 -h 2 -sx 20 -sy 1 -sz 1 -ax 0 1 0 -rcp 0 -cuv 3 -ch 1 -n new_string_02;
+scale -r 0.05 5 0.05 ;
+rotate -r 1 1 -25;
+move -r 2 4.5 0;
+//group 1st hanging ball with strings
+select -all;
+doGroup 1 0 1;
+rename group1 new_group_01;
+//move pivot point
+xform -pivots 0 8.5 0 new_group_01;
+//duplicate to create other 4 hanging balls
+duplicate new_group_01;
+move 0 0 2;
+duplicate new_group_02;
+move 0 0 4;
+duplicate new_group_03;
+move 0 0 6;
+duplicate new_group_04;
+move 0 0 8;
+select -all;
+move -r 0 3 -4;
+
+//create base of cradle
+polyCube -w 15 -h 1 -d 10 -sx 10 -sz 10 -n new_base;
+//create and place vertical bars
+polyCube -w 0.5 -h 12 -d 0.5 -sx 10 -sz 10 -n new_bar_01;
+move -r 6.5 6 4;
+duplicate;
+move -r 0 0 -8;
+duplicate;
+move -r -13 0 0;
+duplicate;
+move -r 0 0 8;
+//create and place horizontal bars
+polyCylinder -h 13 -r 0.25 -n new_bar_05;
+rotate -r -os -fo 0 0 90 ;
+move -r 0 11 4;
+duplicate;
+move -r 0 0 -8;
+//group cradle structure
+select new_base new_bar_01 new_bar_02 new_bar_03 new_bar_04 new_bar_05 new_bar_06;
+group -n new_cradle;
+//place cradle around balls
+rotate -r 0 90 0;
+move -r 0 1 0;
+
+//add expressions
+//big swings
+expression -s "new_group_01.rotateX = clamp(sin(time*1.25)*60,0,0)"  -o new_group_01 -ae 1 -uc all;
+expression -s "new_group_05.rotateX = clamp(0,sin(time*1.25)*60,0)"  -o new_group_05 -ae 1 -uc all;
+//little swings
+expression -s "new_group_02.rotateX = clamp(sin(time*1.25)*10,0,0)"  -o new_group_01 -ae 1 -uc all;
+expression -s "new_group_04.rotateX = clamp(0,sin(time*1.25)*10,0)"  -o new_group_05 -ae 1 -uc all;
+
+
+//create and add shader to strings
+shadingNode "aiStandardSurface" -as -n new_string_shader;
+select new_group_01 new_group_02 new_group_03 new_group_04 new_group_05;
+hyperShade -a new_string_shader;
+select new_string_shader;
+//create and add shader for metal objects
+shadingNode "aiStandardSurface" -as -n new_metal_shader;
+select new_group_01|new_sphere_01 new_group_02|new_sphere_01 new_group_03|new_sphere_01 new_group_04|new_sphere_01 new_group_05|new_sphere_01 new_cradle;
+hyperShade -a new_metal_shader;
+setAttr "new_metal_shader.metalness" 1;
+setAttr "new_metal_shader.baseColor" -type double3 .5 .5 .5 ;
+//create and add a shader to the base
+shadingNode "aiStandardSurface" -ss -as -n new_base_shader;
+select new_cradle|new_base;
+hyperShade -a new_base_shader;
+select new_base_shader;
+setAttr "new_base_shader.baseColor" -type double3 0.204034 0.578 0.539313;
+
+//create light source
+ambientLight;
