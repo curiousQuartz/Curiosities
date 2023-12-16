@@ -1,4 +1,4 @@
-import javax.swing.*;
+import javax.swing.JOptionPane;
 
 /* ********************************************************************************************
  * Adira Lindzon  
@@ -6,7 +6,7 @@ import javax.swing.*;
  * 
  * The main class to initilize the game as many times as the player wishes.
  * ***************************************************************************************** */
-class Mastermind_Game
+class MastermindGame
 {
   public static void main (String[] args)
   {

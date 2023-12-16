@@ -1,12 +1,12 @@
-import javax.swing.*;
+import javax.swing.JOptionPane;
 
-/* ********************************************************************************************
- * Adira Lindzon  
- * 3 June 2016  
- * 
- * The program runs through an entire cycle of Mastermind calling the Board class when 
- * necessary.
- * ***************************************************************************************** */
+/* *****************************************************************
+ * Adira Lindzon                                                   *
+ * 3 December 2023                                                 *
+ *                                                                 *
+ * The program runs through an entire cycle of Mastermind          *
+ * calling the Board class when necessary.                         *
+ * *************************************************************** */
 class Mastermind
 {
   private int turn = 0; //a counter for the turn number
@@ -69,7 +69,11 @@ class Mastermind
         }//end for
         if (!updated)
         {
-          JOptionPane.showMessageDialog(null, "That color is not one of the option, please enter a different one.", "Error:",JOptionPane.PLAIN_MESSAGE);
+          JOptionPane.showMessageDialog(
+            null,
+            "That color is not one of the option, please enter a different one.", 
+            "Error:",JOptionPane.PLAIN_MESSAGE
+          );
           i--;
         }
       }

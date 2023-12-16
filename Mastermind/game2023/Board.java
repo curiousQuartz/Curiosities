@@ -1,13 +1,17 @@
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Color;
+import java.awt.GridLayout;
 
-/* ********************************************************************************************
- * Adira Lindzon  
- * 21 April 2016  
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+/* ****************************************************************
+ * Adira Lindzon
+ * 21 April 2016
  * 
- * The Board class for Mastermind initiallizes, updates, and outputs the board for Mastermind.
- * ***************************************************************************************** */
+ * The Board class for Mastermind initiallizes,
+ * updates, and outputs the board for Mastermind.
+ * ************************************************************** */
 class Board
 {
   private int length = 0; //The length of the pattern
@@ -18,14 +22,15 @@ class Board
   private final JFrame frame =  new JFrame("Mastermind:");//the JFrame
   private final JPanel panel = new JPanel();//the JPanel
   
-  /* ******************************************************************************************
-   * @description: The constructor initializes the boards to store the guesses given and clues 
-   *               recived as well as storing the length of the pattern that needs to be guessed.
-   *     
-   * @parameter: Len is an integer containing the length of the pattern to be guessed.  
+  /* *****************************************************************
+   * @description: The constructor initializes the boards to store the
+   *               guesses given and clues recived as well as storing
+   *               the length of the pattern that needs to be guessed.
+   * 
+   * @param: Len contains the length of the pattern to be guessed.  
    *     
    * @return: none
-   ***************************************************************************************** */
+   **************************************************************** */
   public Board(int len, String[] newColors)
   {
     //initialize the colors array usuing the array of colors sent in
@@ -85,7 +90,7 @@ class Board
    *     
    * @parameter: newGuess is an integer array containing the pattern guessed by the player.
    *             turn is an interger for the round number. 
-   *     
+   * 
    * @return: none
    ***************************************************************************************** */
   public void updateGuess(int[] newGuess, int turn)
@@ -95,7 +100,7 @@ class Board
       guess[turn][i] = newGuess[i];
       panel.add(new JLabel(colors[newGuess[i]]));
     }//end for
-    panel.add(new JLabel(""));
+    panel.add(new JLabel("guess"));
     
   }//end updateGuess
   
@@ -171,6 +176,6 @@ class Board
    ***************************************************************************************** */
   private int randomLocation()
   {
-    return (int)((length*Math.random()));//generates a random integer between 0 and the length
+    return (int)((length*Math.random()));
   }//end randomLocation
 }//end Board
