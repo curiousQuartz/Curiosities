@@ -14,7 +14,7 @@ public class PaintBoard extends JFrame implements MouseListener
   private int[][] guess; //Saves the guesses from each of the rounds
   private int[][] clue; //Saves the clues given each round
   private int x = 50;
-  private int y = 100;
+  private int y = 120;
   
   public static void main (String[] args)//for testing purposes
   {
@@ -48,7 +48,6 @@ public class PaintBoard extends JFrame implements MouseListener
 
   private void initializeColors(int mode)
   {
-    color.put("aqua", new Color( 0, 255, 255 ));
     color.put("aqua", new Color( 0, 255, 255 ));
     color.put("chartreuse", new Color( 127, 255, 0 ));
     color.put("crimson", new Color( 220, 20, 60 ));
@@ -98,9 +97,13 @@ public class PaintBoard extends JFrame implements MouseListener
 
   public void paint(Graphics canvas)
   {
-    canvas.drawString("guesses",length*30,50);
-    canvas.drawString("clues",length*100,50);
-    //set-up boards
+    canvas.setColor(color.get("indigo"));
+    // Draw buttons
+    canvas.drawRoundRect(10, 35, 95, 30, 15, 15);
+    canvas.drawString("Instructions",20,55);
+    // Set-up boards
+    canvas.drawString("guesses",length*30,90);
+    canvas.drawString("clues",length*100,90);
     canvas.setColor(color.get("gray"));
     for(int col = 0; col < length*length; col++)
     {
