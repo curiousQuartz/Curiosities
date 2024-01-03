@@ -24,7 +24,7 @@ public class PaintBoard extends JFrame implements MouseListener
   /* ******************************************************************************************
    * @description: The constructor initializes the boards to store the guesses given and clues 
    *               recived as well as storing the length of the pattern that needs to be guessed.
-   *     
+   * 
    * @parameter: Len is an integer containing the length of the pattern to be guessed.  
    *     
    * @return: none
