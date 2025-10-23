@@ -5,6 +5,7 @@ Paws n Cart, the best online shopping cart for your furry friends.
 ## Important
 
 Each python file is a different version of this program and can be run independently.
+Each file is a version of this challenge experimenting with a different python data structure.
 
 This program requires python 3.10 or later to run
 due to the use of match-case statments which were
