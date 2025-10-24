@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "paws-n-cart"
+version = "0.1.0"
+description = "Paws n Cart - three variants of a shopping cart demo (classes, lists, strings)"
+authors = ["author <author@example.com>"]
+packages = []
+
+[tool.poetry.dependencies]
+python = "^3.8"
+tabulate = "^0.8.10"
+
+[tool.poetry.scripts]
+# CLI entry points - each runs a separate variant of the program
+paws-n-cart-classes = "paws_n_cart.classes_challenge:main"
+paws-n-cart-lists = "paws_n_cart.lists_challenge:main"
+paws-n-cart-strings = "paws_n_cart.strings_challenge:main"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
