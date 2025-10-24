@@ -335,5 +335,10 @@ def get_input(prompt, options=None, valid_type=None):
             return get_input(prompt, options, valid_type)
     return user_input
 
-if __name__ == "__main__":
+
+def main():
     ShellInterface()
+
+
+if __name__ == "__main__":
+    main()
