@@ -6,7 +6,7 @@ authors = ["author <author@example.com>"]
 packages = []
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.10"
 tabulate = "^0.8.10"
 
 [tool.poetry.scripts]
