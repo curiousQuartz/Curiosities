@@ -18,9 +18,9 @@ Paws n' Cart is a challenge I was given and took an interest in. When it was fir
 
 ### Python
 
-- [Paws n' Cart Strings](paws_n_cart/paws_n_cart_strings.py)
-- [Paws n' Cart Lists](paws_n_cart/paws_n_cart_lists.py)
-- [Paws n' Cart Classes](paws_n_cart/paws_n_cart_classes.py)
+- [Paws n' Cart Strings](paws_n_cart/paws_n_cart/strings_challenge.py)
+- [Paws n' Cart Lists](paws_n_cart/paws_n_cart/lists_challenge.py)
+- [Paws n' Cart Classes](paws_n_cart/paws_n_cart/classes_challenge.py)
 
 ## Tools Index
 

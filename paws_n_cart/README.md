@@ -27,3 +27,13 @@ Challenge Description:
         5. Modify quantity of items
 
 This code was created by me but the idea for the challenge is not mine.
+
+## Run with Poetry
+
+```
+poetry install
+poetry run paws-n-cart-classes
+poetry run paws-n-cart-lists
+poetry run paws-n-cart-strings
+
+```
